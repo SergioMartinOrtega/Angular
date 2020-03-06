@@ -1,0 +1,14 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  background: blue;
+  color: white;
+  margin: 0;
+  position: sticky;
+  top: 0;
+}
+
+nav i{
+  padding: 15px;
+}

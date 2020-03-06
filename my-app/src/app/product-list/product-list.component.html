@@ -1,0 +1,28 @@
+<main>
+  <h1>Products</h1>
+  <i class="material-icons">
+    view_list
+  </i>
+  <i class="material-icons">
+    view_module
+  </i>
+
+  <div class="container" *ngFor="let product of products">
+
+    <div><img [src]="product.image" alt="Cosas"></div>
+
+    <div>
+      <h3>
+        {{ product.name }}
+      </h3>
+      <p> Descripción: {{ product.description }}</p>
+      <p> Precio: {{ product.price }} €</p>
+      <button>
+        add to cart
+      </button>
+
+    </div>
+
+  </div>
+
+</main>

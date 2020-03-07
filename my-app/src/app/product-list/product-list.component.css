@@ -5,6 +5,16 @@ main{
 main .container{
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 25px;
+  gap: 5px;
   text-align: left;
+  border-top: 2px solid lightgray;
+  margin: 10px auto;
+}
+
+button {
+  margin: 10px auto;
+  padding: 10px;
+  background: blue;
+  color: white;
+  border: none;
 }

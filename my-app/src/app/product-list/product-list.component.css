@@ -9,6 +9,7 @@ main .container{
   text-align: left;
   border-top: 2px solid lightgray;
   margin: 10px auto;
+  padding: 10px;
 }
 
 button {
@@ -16,5 +17,5 @@ button {
   padding: 10px;
   background: blue;
   color: white;
-  border: none;
+  border-radius: 5px;
 }

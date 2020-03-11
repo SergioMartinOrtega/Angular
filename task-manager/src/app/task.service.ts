@@ -25,6 +25,8 @@ export class TaskService {
   }
 
   updateTask(task: Task){
-    TASKS.push(task);
+    this.delete(task);
+    this.addTask(task);
+    return task;
   }
 }

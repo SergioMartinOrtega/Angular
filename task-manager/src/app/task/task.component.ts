@@ -11,7 +11,7 @@ import { TaskService } from '../task.service';
 })
 export class TaskComponent implements OnInit {
 
-  //@Output() buttonClick = new EventEmitter<{ task: Task, element: HTMLButtonElement }>();
+  @Output() liClick = new EventEmitter<{ task: Task, element: HTMLSpanElement }>();
 
   tasks = this.taskService.list();
 
@@ -44,7 +44,8 @@ export class TaskComponent implements OnInit {
     console.log("cerrado");
   }
 
-  updateDes(task: Task) {
+  updateDes(task: Task, element: HTMLSpanElement) {
+    console.log("actualizar");
     const input = document.createElement('input');
     input.type = 'text';
     input.value = task.description;
@@ -57,9 +58,13 @@ export class TaskComponent implements OnInit {
       const updatedTask = { ...task };
       updatedTask.description = input.value;
       this.taskService.updateTask(updatedTask);
-    }
+      element.remove();
+    };
 
-    
+    element.appendChild(input);
+    element.appendChild(updateButton);
+    element.classList.add('updating');
+
   }
 
 }

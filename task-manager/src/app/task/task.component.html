@@ -8,7 +8,8 @@
         <div *ngIf="task.done; then thenBlock else elseBlock"></div>
         <ng-template #thenBlock><input type="checkbox" checked></ng-template>
         <ng-template #elseBlock><input type="checkbox"></ng-template>
-        <span (click)="updateDes(task)" >{{task.description}}</span>
+        <span #spanElement (click)="updateDes(task, spanElement)" >{{task.description}}</span>
+        <!--liClick.emit({task: task, element: spanElement})-->
       </div>
       <i class="material-icons btn-delete" (click)="openModal(task)" >delete_outline</i>
     </li>

@@ -1,6 +1,6 @@
 <main>
   <label>
-    <input id="taskInput" type="text" placeholder="¿Qué necesitas hacer?">
+    <input #tak (keyup.enter)="createTask(tak.value); tak.value=''"  id="taskInput" type="text" placeholder="¿Qué necesitas hacer?">
   </label>
   <ul id="taskList">
     <li *ngFor="let task of tasks" [class.selected]="task === selectedTask">
@@ -8,13 +8,13 @@
         <div *ngIf="task.done; then thenBlock else elseBlock"></div>
         <ng-template #thenBlock><input type="checkbox" checked></ng-template>
         <ng-template #elseBlock><input type="checkbox"></ng-template>
-        <span>{{task.description}}</span>
+        <span (click)="updateDes(task)" >{{task.description}}</span>
       </div>
-      <i class="material-icons btn-delete" (click)= "openModal(task)" >delete_outline</i>
+      <i class="material-icons btn-delete" (click)="openModal(task)" >delete_outline</i>
     </li>
   </ul>
   <div class="info">
-    <p id="tasksLeft">Quedan 6 tareas</p>
+    <p id="tasksLeft">Quedan tareas</p>
     <div>
       <button id="allButton" class="button" disabled>Todas</button>
       <button id="pendingButton" class="button">Pendientes</button>

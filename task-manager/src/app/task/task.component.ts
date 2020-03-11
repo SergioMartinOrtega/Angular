@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { TASKS } from '../mock-task';
 import { Task } from '../task';
+import { TaskService } from '../task.service';
 
 @Component({
   selector: 'app-task',
@@ -11,11 +12,21 @@ import { Task } from '../task';
 export class TaskComponent implements OnInit {
 
   //@Output() buttonClick = new EventEmitter<{ task: Task, element: HTMLButtonElement }>();
-  tasks = TASKS;
+
+  tasks = this.taskService.list();
+
   selectedTask: Task;
-  constructor() { }
+  value = '';
+  constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
+  }
+
+  createTask(value: string) {
+    console.log(value);
+    let newTask: Task;
+    newTask = { id: 20, description: value, done: false };
+    this.taskService.addTask(newTask);
   }
 
   openModal(task: Task) {
@@ -23,13 +34,32 @@ export class TaskComponent implements OnInit {
     console.log("abierto");
   }
 
-  deleteTask(task: Task){
-    task = null;
+  deleteTask(task: Task) {
+    this.taskService.delete(task);
+    this.selectedTask = null;
   }
 
-  closeModal(){
+  closeModal() {
     this.selectedTask = null;
     console.log("cerrado");
+  }
+
+  updateDes(task: Task) {
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = task.description;
+
+    const updateButton = document.createElement('i');
+    updateButton.className = 'material-icons';
+    updateButton.textContent = 'done';
+
+    updateButton.onclick = () => {
+      const updatedTask = { ...task };
+      updatedTask.description = input.value;
+      this.taskService.updateTask(updatedTask);
+    }
+
+    
   }
 
 }

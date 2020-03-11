@@ -3,14 +3,14 @@
     <input id="taskInput" type="text" placeholder="¿Qué necesitas hacer?">
   </label>
   <ul id="taskList">
-    <li *ngFor="let task of tasks">
+    <li *ngFor="let task of tasks" [class.selected]="task === selectedTask">
       <div>
         <div *ngIf="task.done; then thenBlock else elseBlock"></div>
         <ng-template #thenBlock><input type="checkbox" checked></ng-template>
         <ng-template #elseBlock><input type="checkbox"></ng-template>
         <span>{{task.description}}</span>
       </div>
-      <i class="material-icons btn-delete">delete_outline</i>
+      <i class="material-icons btn-delete" (click)= "openModal(task)" >delete_outline</i>
     </li>
   </ul>
   <div class="info">
@@ -26,15 +26,14 @@
   <p>Autor: Sergio Martín Ortega</p>
   <p>GitHub: <a href="https://github.com/SergioMartinOrtega">https://github.com/SergioMartinOrtega</a></p>
 </footer>
-<div class="modal">
+<div *ngIf="selectedTask" class="modal" id="modal">
   <div class="box">
     <h2>¿Estás seguro de que deseas eliminar esta tarea?</h2>
-    <p>
-      <!--  it fills with javascript when modal opens  -->
-    </p>
+    <p>{{selectedTask.description}}</p>
     <div>
-      <button class="button large">Si</button>
-      <button class="button large">No</button>
+      <button (click)="deleteTask(selectedTask)" class="button large">Si</button>
+      <button (click)="closeModal()" class="button large">No</button>
     </div>
   </div>
 </div>
+
